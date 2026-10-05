@@ -1,0 +1,110 @@
+/* ── Financial Management (loaded only on Financial Management pages through $page_styles) ─────────────── */
+.fin-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 11.5px; }
+.fin-nowrap { white-space: nowrap; }
+.fin-num { text-align: right; font-variant-numeric: tabular-nums; }
+.fin-void { color: var(--muted); text-decoration: line-through; }
+.fin-actions { flex-wrap: nowrap; justify-content: flex-end; }
+.fin-actions .doc-action-form { display: inline-flex; }
+.fin-actions-head { text-align: right; }
+.fin-hint { margin: 0 0 12px; color: var(--muted); font-size: 12.5px; }
+.fin-tabs { margin: 0 0 14px; overflow-x: auto; flex-wrap: nowrap; }
+.fin-tabs .announcement-tab { white-space: nowrap; }
+.fin-pending-count { margin-left: 4px; padding: 1px 7px; border-radius: 999px; background: #fdf3cf; color: #7a5a00; font-size: 11px; font-weight: 700; }
+.fin-type { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+.fin-type-income { background: #e5f3ec; color: #1f7a4f; }
+.fin-type-expense { background: #fde8e8; color: #b4232a; }
+.fin-amount-big { margin-left: 6px; font: 700 20px/1.2 'Space Grotesk', sans-serif; }
+.fin-amount-input { font-variant-numeric: tabular-nums; }
+.fin-section-title { margin: 18px 0 8px; font-size: 15px; }
+.fin-category-list { margin-top: 0; }
+.fin-category-form { flex-wrap: wrap; }
+
+/* Sortable headers */
+.fin-sort { display: inline-flex; align-items: center; gap: 4px; color: inherit; white-space: nowrap; }
+.fin-sort span { font-size: 10px; opacity: .45; }
+.fin-sort.is-active span { opacity: 1; }
+.fin-sort:hover { color: var(--green); }
+th.fin-num .fin-sort { justify-content: flex-end; }
+
+/* Resident link on the record form */
+.fin-resident-box { position: relative; }
+.fin-resident-selected { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border: 1px solid var(--green); border-radius: 10px; background: var(--green-soft); font-size: 13px; }
+.fin-resident-selected[hidden] { display: none; }
+.fin-dropdown { position: absolute; left: 0; right: 0; z-index: 30; max-height: 240px; margin-top: 4px; padding: 6px; overflow-y: auto; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 12px 28px rgba(21, 63, 53, .14); }
+.fin-dropdown[hidden] { display: none; }
+.fin-dropdown .case-lookup-option { width: 100%; }
+
+/* View page */
+.fin-section-btn { margin-top: 10px; }
+.fin-upload { margin-top: 12px; }
+.fin-upload-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.fin-upload-row .form-control { flex: 1 1 220px; }
+.fin-attachments li { align-items: center; }
+.fin-link-danger { padding: 0; color: #b4232a; font-size: 12px; }
+
+/* Sections (Transactions, Budget, Cashbook) */
+.fin-sections { margin: 0 0 16px; }
+
+/* Summary cards */
+.fin-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.fin-card { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); transition: box-shadow .15s ease; }
+.fin-card:hover { box-shadow: 0 6px 16px rgba(21, 63, 53, .07); }
+.fin-card:focus-visible { outline: 3px solid rgba(36, 107, 85, .35); outline-offset: 2px; }
+.fin-card.tone-income { border-left-color: #7fbf9f; }
+.fin-card.tone-expense { border-left-color: #e3a3a6; }
+.fin-card.tone-balance { border-left-color: #153f35; }
+.fin-card.tone-pending { border-left-color: #f0cf8f; }
+.fin-card-value { font: 700 20px/1.15 'Space Grotesk', sans-serif; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.fin-card-label { color: var(--muted); font-size: 12px; }
+
+/* Budget */
+.fin-budget-input { max-width: 150px; margin-left: auto; text-align: right; }
+.fin-used { min-width: 140px; }
+.fin-bar { display: inline-block; width: 90px; height: 8px; margin-right: 8px; overflow: hidden; vertical-align: middle; border-radius: 999px; background: #eef2f0; }
+.fin-bar span { display: block; height: 100%; border-radius: inherit; background: #7fbf9f; }
+.fin-bar.is-high span { background: #e5b45c; }
+.fin-bar.is-over span { background: #d0656b; }
+.fin-used-label { font-size: 12px; font-variant-numeric: tabular-nums; }
+.fin-over { color: #b4232a; font-weight: 700; }
+.fin-row-over td { background: #fff6f6; }
+.fin-total-row td { border-top: 2px solid var(--green); font-weight: 700; }
+.fin-budget-warning p { margin: 0 0 8px; }
+.fin-budget-warning .form-check { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; }
+.fin-budget-warning .form-check-input { margin: 0; }
+p.fin-budget-warning { margin-bottom: 12px; }
+
+/* Export links above the list */
+.fin-results-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 8px; }
+.fin-results-head .activity-history-meta { margin: 0; }
+.fin-exports { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Transaction history (audit) on the view page */
+.fin-history { grid-column: 1 / -1; }
+.fin-history-list { margin: 0; padding: 0; list-style: none; }
+.fin-history-list > li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.fin-history-list > li:last-child { border-bottom: 0; }
+.fin-history-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+.fin-history-head span { color: var(--muted); font-size: 12px; }
+.fin-history-note { margin: 4px 0 0; font-size: 13px; }
+.fin-history-table { width: 100%; margin-top: 6px; border-collapse: collapse; font-size: 12.5px; }
+.fin-history-table th, .fin-history-table td { padding: 4px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.fin-history-table th { color: var(--muted); font-weight: 600; }
+.fin-opening dd.fin-amount-big { margin-left: 0; }
+.fin-opening-cancel { margin-top: 16px; }
+
+/* Cashbook */
+.fin-carried td { background: #f6f9f7; font-style: italic; }
+.fin-empty-row { color: var(--muted); text-align: center; }
+
+@media (max-width: 1100px) { .fin-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+    .fin-actions { flex-wrap: wrap; justify-content: flex-start; }
+}
+
+/* Fixed Cash mode of payment (read-only, not a dropdown). */
+.fin-fixed-field, .fin-fixed-field:focus { background: #f3f6f4; color: var(--ink); cursor: default; box-shadow: none; }
+
+/* Payor / payee name that matches no registered resident. */
+.fin-not-registered { display: flex; flex-direction: column; gap: 2px; margin: 0; padding: 10px 12px; border-left: 3px solid #c98a2b; background: #fff8ec; border-radius: 8px; }
+.fin-not-registered strong { color: #8a5a14; font-size: 13px; }
+.fin-not-registered span { color: var(--muted); font-size: 12px; }

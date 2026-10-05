@@ -1,0 +1,14 @@
+# Private application storage: never served directly over HTTP.
+# Files here (including confidential case evidence) are only delivered by authenticated PHP handlers.
+Require all denied
+Options -Indexes -ExecCGI
+
+# Defence in depth: even if access rules were changed, nothing in here may run as a script.
+<IfModule php_module>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .phps .pht .cgi .pl .py .sh .asp .aspx .jsp
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .phps .pht

@@ -1,0 +1,146 @@
+/* ── Disaster Management module (loaded only on Disaster Management pages through $page_styles) ─────────── */
+.drr-sub { display: block; margin-top: 4px; }
+.drr-nowrap { white-space: nowrap; }
+.drr-actions { flex-wrap: nowrap; justify-content: flex-end; }
+.drr-actions .doc-action-form { display: inline-flex; }
+.drr-actions-head { text-align: right; }
+.drr-text { margin: 0 0 12px; }
+.drr-hint { margin: -4px 0 12px; color: var(--muted); font-size: 12.5px; }
+.drr-area-list { margin-top: 16px; }
+.drr-fixed { font-size: 12px; }
+
+/* Sortable headers */
+.drr-sort { display: inline-flex; align-items: center; gap: 4px; color: inherit; white-space: nowrap; }
+.drr-sort span { font-size: 10px; opacity: .45; }
+.drr-sort.is-active span { opacity: 1; }
+.drr-sort:hover { color: var(--green); }
+
+/* Warning levels (incidents) */
+.drr-alert { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.drr-alert-advisory { background: #e8eefa; color: #2d4f8a; }
+.drr-alert-yellow { background: #fdf3cf; color: #7a5a00; }
+.drr-alert-orange { background: #fde3cc; color: #9a4a0a; }
+.drr-alert-red { background: #fde0e0; color: #b4232a; }
+
+/* Section tabs (Records, Evacuation Centers, Hazard Areas, Vulnerable Residents, Members & Hotlines) */
+.drr-tabs { margin: 0 0 16px; overflow-x: auto; flex-wrap: nowrap; }
+.drr-tabs .announcement-tab { white-space: nowrap; }
+
+.drr-muted { color: var(--muted); font-size: 11.5px; font-weight: 400; }
+.drr-notes { max-width: 320px; }
+.drr-note { margin-bottom: 16px; font-size: 13px; line-height: 1.5; }
+.drr-results-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 8px; }
+.drr-results-head .activity-history-meta { margin: 0; }
+.drr-section + .drr-section { margin-top: 22px; }
+.drr-section-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 10px; font-size: 16px; }
+.drr-count { padding: 1px 9px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: 12px; font-weight: 700; }
+
+/* Evacuation center facilities */
+.drr-facilities { display: flex; flex-wrap: wrap; gap: 4px; }
+.drr-facility { padding: 1px 7px; border-radius: 999px; background: #f1f3f2; color: #8a948f; font-size: 11px; white-space: nowrap; }
+.drr-facility.is-yes { background: var(--green-soft); color: var(--green); font-weight: 700; }
+.drr-checks { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.drr-checks .form-check { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 0; }
+.drr-checks .form-check-input { margin: 0; }
+
+/* Hazard risk levels */
+.drr-risk { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+.drr-risk-low { background: #e5f3ec; color: #1f7a4f; }
+.drr-risk-medium { background: #fdf3cf; color: #7a5a00; }
+.drr-risk-high { background: #fde0e0; color: #b4232a; }
+
+/* Vulnerable residents */
+.drr-group { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.drr-group-senior { background: #efe8f7; color: #5b3a8a; }
+.drr-group-under5 { background: #e8eefa; color: #2d4f8a; }
+
+/* Family picker (check-in, relief): same look as the Health resident picker */
+.drr-selected { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-bottom: 12px; padding: 12px 14px; border: 1px solid var(--green); border-radius: 10px; background: var(--green-soft); }
+.drr-selected > div { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.drr-selected span { color: var(--muted); font-size: 12px; }
+.drr-selected.is-empty { border-style: dashed; border-color: var(--line); background: #fff; }
+.drr-selected.is-warning { border-color: #e5b45c; background: #fffaf0; }
+.drr-search-grid { display: grid; grid-template-columns: minmax(160px, 220px) minmax(0, 1fr); gap: 12px 16px; align-items: start; }
+.drr-search-box { position: relative; }
+.drr-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 30; max-height: 240px; margin: 0; padding: 6px; overflow-y: auto; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 12px 28px rgba(21, 63, 53, .14); }
+.drr-dropdown[hidden] { display: none; }
+.drr-dropdown .case-lookup-option { width: 100%; }
+.drr-hint-below { margin: 6px 0 0; }
+.drr-family-extra { margin-top: 14px; }
+
+/* Evacuees per center */
+.drr-occupancy { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.drr-occupancy-card { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.drr-occupancy-card p { margin: 6px 0 0; color: var(--muted); font-size: 12.5px; }
+.drr-occupancy-card p strong { color: var(--ink); font-size: 15px; }
+.drr-occupancy-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.drr-occupancy-bar { height: 8px; margin-top: 10px; overflow: hidden; border-radius: 999px; background: #eef2f0; }
+.drr-occupancy-bar span { display: block; height: 100%; border-radius: inherit; background: #7fbf9f; }
+.drr-occupancy-bar.is-high span { background: #e5b45c; }
+.drr-occupancy-bar.is-full span { background: #d0656b; }
+
+/* Alerts */
+.drr-alert-card { padding: 14px 16px; border: 1px solid var(--line); border-left: 5px solid var(--line); border-radius: 12px; background: #fff; }
+.drr-alert-card + .drr-alert-card { margin-top: 10px; }
+.drr-alert-card.level-advisory { border-left-color: #7d9bd1; }
+.drr-alert-card.level-yellow { border-left-color: #e8c34a; }
+.drr-alert-card.level-orange { border-left-color: #e8903a; }
+.drr-alert-card.level-red { border-left-color: #d0454c; }
+.drr-alert-card.is-past { opacity: .75; }
+.drr-alert-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.drr-alert-head h3 { margin: 0; font-size: 16px; }
+.drr-alert-card p { margin: 8px 0 0; }
+.drr-alert-meta { color: var(--muted); font-size: 12px; }
+.drr-area-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px 16px; }
+.drr-area-checks .form-check { display: flex; align-items: center; gap: 6px; margin: 0; padding: 0; }
+.drr-area-checks .form-check-input { margin: 0; }
+
+/* Summary cards (Records page) */
+.drr-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.drr-card { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-left: 4px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); transition: box-shadow .15s ease; }
+.drr-card:hover { box-shadow: 0 6px 16px rgba(21, 63, 53, .07); }
+.drr-card:focus-visible { outline: 3px solid rgba(36, 107, 85, .35); outline-offset: 2px; }
+.drr-card.tone-active { border-left-color: #7fbf9f; }
+.drr-card.tone-moved { border-left-color: #a9c1e6; }
+.drr-card.tone-deceased { border-left-color: #e3a3a6; }
+.drr-card.tone-pending { border-left-color: #f0cf8f; }
+.drr-card-count { font: 700 22px/1.1 'Space Grotesk', sans-serif; }
+.drr-card-label { color: var(--muted); font-size: 12px; }
+.drr-exports { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Relief */
+.drr-item-lines { display: grid; gap: 8px; }
+.drr-item-line { display: grid; grid-template-columns: minmax(0, 1fr) 110px; gap: 8px; }
+.drr-duplicate { margin-bottom: 14px; }
+.drr-duplicate p { margin: 0 0 8px; }
+.drr-duplicate .form-check { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; }
+.drr-duplicate .form-check-input { margin: 0; }
+.drr-unserved { margin-bottom: 18px; padding: 12px 14px; border: 1px dashed #e5b45c; border-radius: 12px; background: #fffdf6; }
+.drr-unserved-list li { align-items: center; }
+.drr-cancel-btn { margin-top: 10px; }
+.drr-current-photo { flex-wrap: wrap; }
+.drr-current-photo .form-check { display: inline-flex; align-items: center; gap: 6px; margin: 0; padding: 0; }
+.drr-current-photo .form-check-input { margin: 0; }
+.drr-related { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+@media (max-width: 900px) { .drr-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .drr-search-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+    .drr-actions { flex-wrap: wrap; justify-content: flex-start; }
+}
+
+/* PWD and Solo Parent groups (Vulnerable Residents). A resident can show several group badges. */
+.drr-group-pwd { background: #e6f3ef; color: #24684f; }
+.drr-group-solo_parent { background: #fbeee6; color: #8a4a22; }
+.drr-group-cell { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+
+/* Family picker with a priority group (Senior, Under 5, PWD, Solo Parent) before the Purok. */
+.drr-search-grid.has-group { grid-template-columns: minmax(160px, 220px) minmax(150px, 200px) minmax(0, 1fr); }
+.drr-option-tag { margin-left: 6px; font-size: 10.5px; padding: 1px 7px; vertical-align: middle; }
+@media (max-width: 900px) { .drr-search-grid.has-group { grid-template-columns: 1fr 1fr; } .drr-search-grid.has-group .drr-search-box { grid-column: 1 / -1; } }
+@media (max-width: 600px) { .drr-search-grid.has-group { grid-template-columns: 1fr; } }
+
+/* Residents' Disaster Info: evacuation center cards on every screen size */
+.drr-info-cards { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.drr-info-cards .resident-card { margin: 0; }
+.drr-sub-inline { display: inline-flex; align-items: center; gap: 6px; margin: 0 10px 4px 0; white-space: nowrap; }

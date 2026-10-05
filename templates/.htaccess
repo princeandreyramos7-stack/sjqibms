@@ -1,0 +1,2 @@
+# Template sources are rendered only through the protected document preview; block direct web access.
+Require all denied

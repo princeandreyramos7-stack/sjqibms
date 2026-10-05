@@ -1,0 +1,12 @@
+# Confidential complaint/blotter evidence. Direct HTTP access is always denied; downloads go only through
+# the authenticated, authorized evidence handler. Repeated here so the rule survives changes to storage/.htaccess.
+Require all denied
+Options -Indexes -ExecCGI
+<IfModule php_module>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .phps .pht .cgi .pl .py .sh .asp .aspx .jsp
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .phps .pht

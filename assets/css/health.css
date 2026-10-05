@@ -1,0 +1,103 @@
+/* ── Health module (loaded only on Health pages through $page_styles) ─────────────────────────────────── */
+.health-sub { display: block; margin-top: 2px; color: var(--muted); font-size: 11.5px; }
+.health-sub.is-due { color: #b4232a; font-weight: 700; }
+.health-nowrap { white-space: nowrap; }
+.health-actions { flex-wrap: nowrap; justify-content: flex-end; }
+.health-actions .doc-action-form { display: inline-flex; }
+.health-actions-head { text-align: right; }
+.health-due-count { margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: #fde8e8; color: #b4232a; font-size: 11.5px; font-weight: 700; }
+
+/* Follow-ups that are due today or overdue */
+.health-row-due td { background: #fffaf0; }
+.health-row-due td:first-child { box-shadow: inset 3px 0 0 #e5b45c; }
+.resident-card.health-row-due { border-left: 3px solid #e5b45c; background: #fffaf0; }
+
+/* Resident picker on the record form */
+.health-selected { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-bottom: 12px; padding: 12px 14px; border: 1px solid var(--green); border-radius: 10px; background: var(--green-soft); }
+.health-selected > div { display: flex; min-width: 0; flex-direction: column; gap: 3px; }
+.health-selected span { color: var(--muted); font-size: 12px; }
+.health-selected.is-empty { border-style: dashed; border-color: var(--line); background: #fff; }
+/* Purok first, then the resident: the list is a compact dropdown shown only while choosing */
+.health-search-grid { display: grid; grid-template-columns: minmax(160px, 220px) minmax(0, 1fr); gap: 12px 16px; align-items: start; }
+.health-search-box { position: relative; }
+.health-dropdown { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 30; max-height: 240px; margin: 0; padding: 6px; overflow-y: auto; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: 0 12px 28px rgba(21, 63, 53, .14); }
+.health-dropdown[hidden] { display: none; }
+.health-dropdown .case-lookup-option { width: 100%; }
+.health-hint { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+@media (max-width: 600px) { .health-search-grid { grid-template-columns: 1fr; } }
+.health-remarks { margin: 0 0 12px; }
+
+/* Phase 2: vital signs, medicines, referral */
+.health-vitals { display: grid; grid-template-columns: minmax(200px, 1.4fr) repeat(3, minmax(110px, 1fr)); gap: 12px 16px; }
+.health-bp { display: flex; align-items: center; gap: 6px; }
+.health-bp span { color: var(--muted); font-weight: 700; }
+.health-medicine-lines { display: flex; flex-direction: column; gap: 8px; }
+.health-medicine-line { display: grid; grid-template-columns: minmax(0, 1fr) 96px auto; gap: 8px; align-items: center; }
+.health-given { margin: 0 0 6px; padding-left: 18px; }
+.health-yesno { display: flex; gap: 18px; padding-top: 6px; }
+.health-yesno label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.health-vitals-line { font-weight: 600; }
+.health-filter-dates { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.health-filter-dates span { color: var(--muted); font-size: 12px; }
+/* Simplified Health layout: heading, tabs, then a one-line "Needs attention" bar */
+.health-heading { margin-bottom: 12px; }
+.health-heading p { margin-bottom: 0; }
+.health-attention { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 16px; padding: 10px 14px; border: 1px solid #f1d39a; border-radius: 12px; background: #fff8eb; font-size: 14px; }
+.health-attention.is-clear { border-color: #cfe6da; background: #f1f8f4; color: #2f5f4c; }
+.health-attention-label { font-weight: 700; color: #8a5a00; }
+.health-attention-item { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: #fff; border: 1px solid #f1d39a; color: #7a3b00; text-decoration: none; }
+.health-attention-item strong { color: #b4232a; }
+.health-attention-item:hover, .health-attention-item:focus-visible { background: #ffefd2; }
+.health-menu { position: relative; display: inline-block; }
+.health-menu > summary { list-style: none; cursor: pointer; }
+.health-menu > summary::-webkit-details-marker { display: none; }
+.health-menu-list { position: absolute; right: 0; top: calc(100% + 6px); z-index: 40; min-width: 210px; padding: 6px; border: 1px solid var(--line); border-radius: 12px; background: #fff; box-shadow: 0 12px 28px rgba(21, 63, 53, .14); }
+.health-menu-list a { display: block; padding: 9px 12px; border-radius: 8px; color: inherit; text-decoration: none; font-weight: 600; }
+.health-menu-list a:hover, .health-menu-list a:focus-visible { background: var(--green-soft, #eaf5ef); }
+.health-meta-line:empty { display: none; }
+@media (max-width: 640px) { .health-menu-list { left: 0; right: auto; } }
+
+/* Health dashboard cards and section tabs (Phases 3–5) */
+.health-cards { margin-bottom: 18px; }
+.health-cards .stat-card { min-height: 0; }
+.health-card-alert .stat-value { color: #b4232a; }
+.health-tabs { margin-bottom: 16px; overflow-x: auto; flex-wrap: nowrap; }
+.health-tabs .announcement-tab { white-space: nowrap; }
+.health-dose-list { display: flex; flex-direction: column; gap: 10px; }
+.health-dose-row { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(130px, 170px) minmax(110px, 1fr); gap: 8px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; }
+.health-dose-check { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; cursor: pointer; }
+.health-referral-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.health-referral { padding: 14px 16px; }
+.health-referral.is-pending { border-left: 3px solid #e5b45c; }
+.health-referral-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.health-referral-complete { display: grid; grid-template-columns: 160px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+.health-monthly-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.health-monthly-section { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; }
+.health-monthly-section h3 { margin: 0 0 8px; font-size: 16px; }
+.health-monthly-table td { padding: 6px 8px; }
+.health-monthly-table tr.is-total td { font-weight: 700; }
+.health-history-programs { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 20px; }
+@media (max-width: 640px) {
+    .health-dose-row, .health-referral-complete { grid-template-columns: 1fr; }
+    .health-history-programs { grid-template-columns: 1fr; }
+}
+
+/* Small tables (Diagnosis List, Morbidity Report) stay tables on phones and scroll sideways inside their box */
+.resident-table-wrap.health-keep-table { display: block; }
+.health-condition-add { max-width: 520px; margin: 4px 0 18px; }
+.health-condition-row { display: flex; gap: 8px; }
+.health-report-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; margin-bottom: 14px; }
+.health-report-filters > div { display: flex; flex-direction: column; gap: 4px; }
+.health-report-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.health-report-card { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.health-report-card strong { display: block; font-size: 22px; }
+.health-report-card span { color: var(--muted); font-size: 12px; }
+.health-report-table th, .health-report-table td { white-space: nowrap; }
+.health-report-table tfoot td { font-weight: 700; border-top: 2px solid var(--line); }
+@media (max-width: 760px) { .health-vitals { grid-template-columns: 1fr 1fr; } .health-vital-bp { grid-column: 1 / -1; } }
+@media (max-width: 420px) { .health-medicine-line { grid-template-columns: minmax(0, 1fr) 72px auto; } }
+.health-new-for { margin-top: 12px; }
+
+@media (max-width: 760px) {
+    .health-actions { flex-wrap: wrap; justify-content: flex-start; }
+}

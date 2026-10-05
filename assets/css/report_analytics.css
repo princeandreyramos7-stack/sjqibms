@@ -1,0 +1,71 @@
+/* ── Reports: module reports, Analytics Overview and report sections (loaded through $page_styles) ────────── */
+.rpa-panel { min-width: 0; }
+.rpa-panel > * { min-width: 0; }
+.rpa-table-wrap { width: 100%; overflow-x: auto; }
+.rpa-table-card.is-wide { grid-column: 1 / -1; }
+.rpa-table th.rpa-num, .rpa-table td.rpa-num { text-align: right; }
+.rpa-exports { flex-wrap: wrap; }
+.rpa-period { margin: 4px 0 16px; color: var(--muted); font-size: 13px; }
+.rpa-period strong { color: var(--ink); }
+.rpa-empty { margin: 8px 0 18px; }
+
+/* Summary cards */
+.rpa-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-bottom: 18px; }
+.rpa-card { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-left: 4px solid var(--green); border-radius: 12px; background: #fff; color: var(--ink); }
+a.rpa-card { transition: box-shadow .15s ease; }
+a.rpa-card:hover { box-shadow: 0 6px 16px rgba(21, 63, 53, .07); }
+a.rpa-card:focus-visible { outline: 3px solid rgba(36, 107, 85, .35); outline-offset: 2px; }
+.rpa-card-value { font: 700 21px/1.15 'Space Grotesk', sans-serif; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.rpa-card-label { font-size: 13px; font-weight: 700; }
+.rpa-card-hint { color: var(--muted); font-size: 11.5px; }
+
+/* Charts */
+.rpa-charts { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.rpa-chart { margin: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; min-width: 0; }
+.rpa-chart figcaption { margin-bottom: 8px; font-size: 14px; font-weight: 700; color: var(--ink); }
+.rpa-canvas-wrap { position: relative; height: 260px; }
+.rpa-chart:not(.has-chart) .rpa-canvas-wrap { display: none; }
+.rpa-chart.has-chart .rpa-chart-data { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.rpa-chart-data { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.rpa-chart-data th, .rpa-chart-data td { padding: 4px 6px; border-bottom: 1px solid var(--line); text-align: left; }
+.rpa-chart-data td { text-align: right; font-variant-numeric: tabular-nums; }
+.rpa-chart-empty { margin: 0; color: var(--muted); font-size: 13px; }
+
+/* Summary tables and detail */
+.rpa-tables { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.rpa-table-card { min-width: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.rpa-table-card h2, .rpa-detail h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 15px; }
+.rpa-num { text-align: right; font-variant-numeric: tabular-nums; }
+.rpa-total td { border-top: 2px solid var(--green); font-weight: 700; }
+.rpa-notes { margin: 0 0 16px; padding-left: 18px; color: var(--muted); font-size: 12.5px; }
+.rpa-notes li + li { margin-top: 3px; }
+.rpa-detail { margin-top: 8px; }
+.rpa-count { padding: 1px 9px; border-radius: 999px; background: var(--green-soft); color: var(--green); font-size: 12px; font-weight: 700; }
+.rpa-card-key { color: var(--muted); font-size: 12px; }
+.rpa-detail-cards p { margin: 0 0 2px; }
+
+/* Reports page: sections and confidential badge */
+.report-section + .report-section { margin-top: 20px; }
+.report-section-title { margin: 6px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.report-lock { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; padding: 1px 8px; border: 1px solid #f3c6c0; border-radius: 999px; background: #fdf1f0; color: #9a2a1d; font-size: 10.5px; font-weight: 700; letter-spacing: .02em; vertical-align: middle; }
+.report-lock svg { width: 11px; height: 11px; }
+.report-analytics-btn { display: inline-flex; align-items: center; gap: 6px; }
+
+/* Analytics Overview */
+.rpa-overview-section + .rpa-overview-section { margin-top: 22px; }
+.rpa-overview-section h2 { margin: 0 0 10px; font-size: 16px; }
+.rpa-chart-link { display: inline-block; margin-top: 8px; font-size: 12.5px; font-weight: 700; color: var(--green); }
+
+/* Confidential report analytics (above the existing document preview) */
+.rpa-confidential { margin-bottom: 16px; }
+
+@media (max-width: 760px) {
+    .rpa-charts, .rpa-tables { grid-template-columns: minmax(0, 1fr); }
+    .rpa-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rpa-canvas-wrap { height: 230px; }
+    .rpa-card-value { font-size: 18px; }
+    .rpa-exports .btn { flex: 1 1 auto; }
+}
+@media (max-width: 380px) {
+    .rpa-cards { grid-template-columns: minmax(0, 1fr); }
+}

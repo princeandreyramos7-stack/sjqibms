@@ -1,0 +1,54 @@
+/* ── Public SMS registration (sms_register.php): large text and buttons, mobile first ─────────────────────── */
+:root { --smsr-green: #1f6b52; --smsr-green-dark: #154d3b; --smsr-green-soft: #e6f2ed; --smsr-ink: #15302a; --smsr-muted: #4c5f59; --smsr-line: #c9d8d2; --smsr-red: #a3262a; --smsr-red-soft: #fdecec; --smsr-gold: #f3c64a; }
+* { box-sizing: border-box; }
+body.smsr { margin: 0; background: #f2f6f4; color: var(--smsr-ink); font: 400 19px/1.55 'DM Sans', system-ui, sans-serif; }
+.smsr-test-banner { padding: 12px 16px; background: var(--smsr-gold); color: #3d2c00; font-size: 17px; text-align: center; }
+.smsr-test-banner strong { padding: 2px 8px; margin-right: 4px; border-radius: 6px; background: #3d2c00; color: #fff; letter-spacing: .5px; }
+.smsr-header { padding: 14px 16px; background: var(--smsr-green-dark); }
+.smsr-brand { display: inline-flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; }
+.smsr-brand img { border-radius: 50%; background: #fff; }
+.smsr-brand strong { display: block; font-size: 20px; }
+.smsr-brand small { display: block; font-size: 15px; opacity: .85; }
+.smsr-main { max-width: 600px; margin: 0 auto; padding: 20px 16px 40px; }
+.smsr-card { padding: 24px 20px; border: 1px solid var(--smsr-line); border-radius: 16px; background: #fff; box-shadow: 0 6px 22px rgba(21, 77, 59, .08); }
+.smsr-card h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.25; }
+.smsr-lead { margin: 0 0 20px; color: var(--smsr-muted); }
+.smsr-form { display: flex; flex-direction: column; gap: 18px; }
+.smsr-field { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.smsr-field legend { padding: 0; margin-bottom: 4px; font-weight: 700; font-size: 20px; }
+.smsr-field label, .smsr-otp label { font-weight: 700; font-size: 19px; }
+.smsr-address label { font-weight: 500; font-size: 18px; }
+.smsr-form input[type="text"], .smsr-form input[type="tel"], .smsr-form select { width: 100%; min-height: 58px; padding: 12px 14px; border: 2px solid var(--smsr-line); border-radius: 12px; background: #fff; color: var(--smsr-ink); font: inherit; font-size: 20px; }
+.smsr-form input:focus, .smsr-form select:focus { border-color: var(--smsr-green); outline: 3px solid rgba(31, 107, 82, .25); outline-offset: 1px; }
+.smsr-form input.is-locked { background: var(--smsr-green-soft); border-color: var(--smsr-green); font-weight: 700; }
+#otp_code { letter-spacing: 8px; text-align: center; font-size: 28px; font-weight: 700; }
+.smsr-hint { margin: 0; color: var(--smsr-muted); font-size: 17px; }
+.smsr-consent { display: flex; gap: 14px; align-items: flex-start; padding: 14px; border: 2px solid var(--smsr-line); border-radius: 12px; background: #fafcfb; font-size: 17px; cursor: pointer; }
+.smsr-consent input { flex: 0 0 auto; width: 28px; height: 28px; margin-top: 2px; accent-color: var(--smsr-green); }
+.smsr-captcha { min-height: 66px; }
+.smsr-captcha[hidden] { display: none; }
+.smsr-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 60px; padding: 12px 18px; border: 2px solid transparent; border-radius: 12px; font: inherit; font-size: 21px; font-weight: 700; text-decoration: none; cursor: pointer; }
+.smsr-btn:focus-visible { outline: 3px solid rgba(31, 107, 82, .35); outline-offset: 2px; }
+.smsr-btn-primary { background: var(--smsr-green); color: #fff; }
+.smsr-btn-primary:hover:not(:disabled) { background: var(--smsr-green-dark); }
+.smsr-btn-secondary { background: #fff; border-color: var(--smsr-green); color: var(--smsr-green-dark); }
+.smsr-btn:disabled { background: #d8e0dd; border-color: #d8e0dd; color: #5d6b66; cursor: not-allowed; }
+.smsr-btn-register { margin-top: 4px; }
+.smsr-otp { display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 2px dashed var(--smsr-green); border-radius: 14px; background: var(--smsr-green-soft); }
+.smsr-otp[hidden], .smsr-done[hidden], .smsr-message[hidden], .smsr-test-code[hidden], .smsr-form[hidden] { display: none; }
+.smsr-sent { margin: 0; font-size: 17px; }
+.smsr-test-code { padding: 10px 12px; border-radius: 10px; background: var(--smsr-gold); color: #3d2c00; font-size: 18px; text-align: center; }
+.smsr-test-code strong { font-size: 26px; letter-spacing: 4px; }
+.smsr-message { margin: 0; padding: 14px 16px; border-radius: 12px; font-size: 18px; font-weight: 500; }
+.smsr-message.is-error { background: var(--smsr-red-soft); color: var(--smsr-red); border: 1px solid #f2c4c5; }
+.smsr-message.is-success { background: var(--smsr-green-soft); color: var(--smsr-green-dark); border: 1px solid #bcdccf; }
+.smsr-done { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; outline: none; }
+.smsr-done-icon { display: grid; place-items: center; width: 84px; height: 84px; border-radius: 50%; background: var(--smsr-green); color: #fff; font-size: 46px; font-weight: 700; }
+.smsr-done h2 { margin: 0; font-size: 28px; }
+.smsr-done p { margin: 0 0 6px; font-size: 19px; }
+.smsr-footnote { margin: 22px 0 0; padding: 14px 16px; border-radius: 12px; background: #fff; border: 1px solid var(--smsr-line); font-size: 18px; text-align: center; }
+@media (min-width: 640px) {
+    .smsr-main { padding-top: 36px; }
+    .smsr-card { padding: 32px 34px; }
+    .smsr-card h1 { font-size: 32px; }
+}

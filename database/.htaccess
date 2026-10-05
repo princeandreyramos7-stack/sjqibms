@@ -1,0 +1,3 @@
+# Database schema and migration files are for administrators with file access only; never served over HTTP.
+Require all denied
+Options -Indexes

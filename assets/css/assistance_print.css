@@ -1,0 +1,8 @@
+/* ── Relief & Assistance Acknowledgment (loaded after disaster_print.css, which provides the sheet, header and tables) ── */
+.ast-sheet { min-height: auto; }
+.ast-system { margin: 1mm 0 0; color: #555; font-size: 8pt; text-align: center; letter-spacing: .3pt; }
+.ast-statement { margin: 8mm 0 0; font-size: 9.5pt; }
+.ast-signatures { grid-template-columns: repeat(3, 1fr); gap: 12mm; }
+@media (max-width: 640px) {
+    .ast-signatures { grid-template-columns: 1fr; gap: 8mm; }
+}
