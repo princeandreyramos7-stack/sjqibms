@@ -405,7 +405,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOpen = btn.getAttribute('aria-expanded') === 'true';
             btn.setAttribute('aria-expanded', String(!isOpen));
             if (isOpen) { menu?.setAttribute('hidden', ''); }
-            else { menu?.removeAttribute('hidden'); }
+            else if (menu) {
+                // The menu opens leftward from the button; on narrow screens the button can sit at the left edge,
+                // so open it rightward instead whenever it would run off the screen.
+                menu.classList.remove('is-align-left');
+                menu.removeAttribute('hidden');
+                if (menu.getBoundingClientRect().left < 8) menu.classList.add('is-align-left');
+            }
         }
     });
 

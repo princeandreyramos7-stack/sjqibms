@@ -83,6 +83,14 @@ a { color: inherit; text-decoration: none; }
 .user-details span { margin-top: 2px; color: var(--muted); font-size: 10px; }
 .logout-link { color: var(--muted); font-size: 12px; }
 .logout-link:hover { color: var(--green); }
+.logout-link svg { display: none; width: 18px; height: 18px; }
+/* Phones: the text link becomes an icon button beside the avatar (the user name is hidden there too). */
+@media (max-width: 760px) {
+    .topbar-actions .logout-link { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); }
+    .topbar-actions .logout-link:hover, .topbar-actions .logout-link:focus-visible { border-color: #cc5d50; color: #cc5d50; }
+    .logout-link svg { display: block; }
+    .logout-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 .content { width: 100%; max-width: 1440px; flex: 1 1 auto; margin: 0 auto; padding: 37px 40px 45px; }
 .dashboard-content { display: flex; flex-direction: column; }
 .dashboard-content .stats-grid { order: 1; }
@@ -916,6 +924,12 @@ a.document-quick-card:focus-visible { outline: 3px solid rgba(36, 107, 85, .25);
 
 .action-menu-dropdown { position: absolute; z-index: 50; top: calc(100% + 6px); right: 0; min-width: 160px; padding: 5px 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow); }
 .action-menu-dropdown[hidden] { display: none; }
+.action-menu-dropdown.is-align-left { right: auto; left: 0; }
+@media (max-width: 600px) {
+    .action-menu-btn { width: 40px; height: 40px; }
+    .action-menu-dropdown { min-width: 190px; max-width: calc(100vw - 32px); }
+    .action-menu-item { padding: 12px 16px; font-size: 14px; }
+}
 
 .action-menu-item { display: block; width: 100%; padding: 9px 15px; border: 0; background: transparent; color: var(--ink); cursor: pointer; font: 500 13px 'DM Sans', sans-serif; text-align: left; text-decoration: none; white-space: nowrap; transition: background .1s ease; }
 .action-menu-item:hover, .action-menu-item:focus-visible { background: var(--green-soft); color: var(--green); outline: none; }

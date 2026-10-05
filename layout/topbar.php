@@ -21,6 +21,6 @@ $unread_notifications = unread_notifications_count();
             <div class="avatar"><?= e(strtoupper(substr(current_user()['name'] ?? 'A', 0, 1))) ?></div>
             <div class="user-details"><strong><?= e(current_user()['name'] ?? 'Administrator') ?></strong><span><?= e(role_title()) ?></span></div>
         </a>
-        <a class="logout-link" href="logout.php">Sign out</a>
+        <a class="logout-link" href="logout.php" aria-label="Sign out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg><span class="logout-text">Sign out</span></a>
     </div>
 </header>
