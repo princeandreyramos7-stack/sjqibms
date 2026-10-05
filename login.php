@@ -130,7 +130,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="portal-form-area">
         <div class="portal-card">
             <a class="portal-back" href="index.php"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back to website</a>
-            <img class="portal-logo" src="assets/img/barangay-san-jose-logo.jpg" alt="Barangay San Jose seal">
+            <div class="portal-logo-row">
+                <img class="portal-logo" src="assets/img/barangay-san-jose-logo.jpg" alt="Barangay San Jose seal">
+                <span class="portal-logo-name">SJQIBMS</span>
+            </div>
             <span class="portal-role-badge"><?= icon_svg($portal['icon']) ?><?= e($portal['title']) ?></span>
             <h2><?= e($portal['short']) ?> Login</h2>
             <p class="portal-sub">Sign in with your <?= e($portal['title']) ?> account.</p>
