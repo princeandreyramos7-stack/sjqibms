@@ -4,10 +4,14 @@ declare(strict_types=1);
 const APP_NAME = 'SJQIBMS';
 const APP_FULL_NAME = 'Barangay San Jose Management System';
 const APP_TIMEZONE = 'Asia/Manila';
-const DB_HOST = '127.0.0.1';
-const DB_NAME = 'sjqibms';
-const DB_USER = 'root';
-const DB_PASS = '';
+
+// Passwords and keys for this server live in config/secrets.php, which is never uploaded over another server's copy:
+// the database login (DB_HOST, DB_NAME, DB_USER, DB_PASS) and the Semaphore API key. The defaults below are XAMPP's.
+if (is_file(__DIR__ . '/secrets.php')) require __DIR__ . '/secrets.php';
+defined('DB_HOST') || define('DB_HOST', '127.0.0.1');
+defined('DB_NAME') || define('DB_NAME', 'sjqibms');
+defined('DB_USER') || define('DB_USER', 'root');
+defined('DB_PASS') || define('DB_PASS', '');
 
 // Admin Access Gate (admin_gate.php): only a bcrypt hash of the access code is stored, never the code itself.
 // To change the code, run: php -r "echo password_hash('NEWCODE', PASSWORD_DEFAULT);" and paste the result here.
@@ -18,8 +22,7 @@ const ADMIN_GATE_PASS_SECONDS = 600;      // a passed gate is valid for 10 minut
 
 // ── Semaphore SMS ─────────────────────────────────────────────────────────────
 // Regenerate the API key at https://semaphore.co if it was ever exposed.
-// The API key is kept in config/secrets.php (not in this file, so it is never shared with the code).
-if (is_file(__DIR__ . '/secrets.php')) require __DIR__ . '/secrets.php';
+// The API key is kept in config/secrets.php (loaded above; not in this file, so it is never shared with the code).
 defined('SEMAPHORE_API_KEY') || define('SEMAPHORE_API_KEY', '');
 const SEMAPHORE_SENDER_NAME = 'LandCert';
 
