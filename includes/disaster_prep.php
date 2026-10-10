@@ -308,33 +308,39 @@ function disaster_contact_validate(array $input): array
 // ── Vulnerable residents (read-only from Residents) ────────────────────────────
 // Only what the Residents module records can be used: senior citizens and children under 5 come from the birth date;
 // PWD and solo parents come from the checkboxes on the resident profile (once migration 20261007_resident_pwd_solo_parent
-// is applied); pregnant residents come from prenatal visits in the Health records (disaster_pregnant_visible()). A resident can be in more than
-// one group (for example a senior citizen who is also a PWD) and is then listed once with every group shown.
+// is applied); the "Priority" group comes from the Health records (disaster_priority_visible()). A resident can be in more
+// than one group (for example a senior citizen who is also a PWD) and is then listed once with every group shown.
 
 function disaster_vulnerable_groups(): array
 {
     $groups = ['senior' => 'Senior citizen (60+)', 'under5' => 'Child under 5'];
     if (residents_sector_ready(db())) $groups += ['pwd' => 'PWD (person with disability)', 'solo_parent' => 'Solo parent'];
-    if (disaster_pregnant_visible()) $groups['pregnant'] = 'Pregnant';
+    if (disaster_priority_visible()) $groups['priority'] = disaster_priority_reason_visible() ? 'Pregnant' : 'Priority';
     // Serious chronic illness is NOT listed here: it stays with the Health Workers (owner's decision, 2026-10-04).
     return $groups;
 }
 
-// Pregnancy is not on resident profiles; it is inferred from the Health module: a prenatal visit in the last 280 days
-// with no postnatal visit after it. Only the "Pregnant" group is shown (never the health record or its details), to
-// those who may see vulnerable residents' names in Disaster Management (not the Treasurer), so pregnant residents are
-// included in evacuation and relief planning.
-function disaster_pregnant_visible(): bool
+// "Priority": residents who are pregnant, inferred from the Health module (a prenatal visit in the last 280 days with no
+// postnatal visit after it), so they are included in evacuation and relief planning. Pregnancy is sensitive personal
+// information (Data Privacy Act), so the reason is shown only to Health Workers (owner's decision, 2026-10-07); everyone
+// else who may see vulnerable residents' names (not the Treasurer) sees only "Priority", and the group key, filter value
+// and badge class never name it. No health record or detail is ever shown here.
+function disaster_priority_visible(): bool
 {
     static $ready = null;
     if ($ready === null) $ready = (int) db()->query("SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'health_records'")->fetchColumn() === 1;
     return $ready && disaster_can_view_vulnerable();
 }
 
+function disaster_priority_reason_visible(): bool
+{
+    return has_role('health_worker');
+}
+
 // Short labels for badges and table cells.
 function disaster_vulnerable_short_label(string $group): string
 {
-    return ['senior' => 'Senior', 'under5' => 'Under 5', 'pwd' => 'PWD', 'solo_parent' => 'Solo Parent', 'pregnant' => 'Pregnant'][$group] ?? $group;
+    return ['senior' => 'Senior', 'under5' => 'Under 5', 'pwd' => 'PWD', 'solo_parent' => 'Solo Parent', 'priority' => disaster_priority_reason_visible() ? 'Pregnant' : 'Priority'][$group] ?? $group;
 }
 
 // SQL condition for a group on residents r (dates computed here from today's date, quoted).
@@ -346,7 +352,7 @@ function disaster_vulnerable_condition(PDO $connection, string $group): string
         'under5' => 'r.birth_date > ' . $connection->quote($today->modify('-5 years')->format('Y-m-d')) . ' AND r.birth_date <= ' . $connection->quote($today->format('Y-m-d')),
         'pwd' => 'r.is_pwd = 1',
         'solo_parent' => 'r.is_solo_parent = 1',
-        'pregnant' => "EXISTS (SELECT 1 FROM health_records hp WHERE hp.resident_id = r.id AND hp.service = 'prenatal' AND hp.archived_at IS NULL AND hp.status <> 'cancelled' AND hp.service_date > " . $connection->quote($today->modify('-280 days')->format('Y-m-d')) . ' AND hp.service_date <= ' . $connection->quote($today->format('Y-m-d'))
+        'priority' => "EXISTS (SELECT 1 FROM health_records hp WHERE hp.resident_id = r.id AND hp.service = 'prenatal' AND hp.archived_at IS NULL AND hp.status <> 'cancelled' AND hp.service_date > " . $connection->quote($today->modify('-280 days')->format('Y-m-d')) . ' AND hp.service_date <= ' . $connection->quote($today->format('Y-m-d'))
             . " AND NOT EXISTS (SELECT 1 FROM health_records pn WHERE pn.resident_id = r.id AND pn.service = 'postnatal' AND pn.archived_at IS NULL AND pn.status <> 'cancelled' AND pn.service_date >= hp.service_date))",
     };
 }
@@ -400,7 +406,7 @@ function disaster_vulnerable_counts(array $rows): array
 // "5 senior citizens · 3 children under 5 · 2 PWD · 1 solo parent"
 function disaster_vulnerable_summary(array $counts): string
 {
-    $words = ['senior' => ['senior citizen', 'senior citizens'], 'under5' => ['child under 5', 'children under 5'], 'pwd' => ['PWD', 'PWD'], 'solo_parent' => ['solo parent', 'solo parents'], 'pregnant' => ['pregnant', 'pregnant']];
+    $words = ['senior' => ['senior citizen', 'senior citizens'], 'under5' => ['child under 5', 'children under 5'], 'pwd' => ['PWD', 'PWD'], 'solo_parent' => ['solo parent', 'solo parents'], 'priority' => disaster_priority_reason_visible() ? ['pregnant', 'pregnant'] : ['priority', 'priority']];
     $parts = [];
     foreach ($counts as $group => $count) $parts[] = $count . ' ' . $words[$group][$count === 1 ? 0 : 1];
     return implode(' · ', $parts);

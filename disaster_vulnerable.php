@@ -8,7 +8,7 @@ $connection = db();
 
 // Vulnerable Residents: an automatic, read-only list from the Residents module (active residents only), grouped by
 // Purok. Senior citizens (60+) and children under 5 come from the birth date; PWD and solo parents from the resident
-// profile checkboxes; pregnant residents from prenatal visits in the Health records (the group only, no health details).
+// profile checkboxes; "Priority" from the Health records (the label only; the reason is shown only to Health Workers).
 // Nothing is stored by this page.
 $state = disaster_vulnerable_state($_GET);
 $rows = disaster_vulnerable_rows($connection, $state);
@@ -72,8 +72,8 @@ require __DIR__ . '/layout/header.php';
     </div>
     <?= disaster_tabs('vulnerable') ?>
     <div class="dashboard-status drr-note" role="note">
-        <?php if ($sector_ready): ?>Senior citizens (60 and above) and children under 5 are listed from each resident's birth date; PWD and solo parents from the checkboxes on the resident profile (active residents only). A resident in more than one group is listed once. <?= disaster_pregnant_visible() ? 'Pregnant residents come from the Health module (a prenatal check-up in the last 9 months with no postnatal visit after it). No other health information is shown.' : '' ?><?php else: ?>Senior citizens (60 and above) and children under 5 are listed from each resident's birth date (active residents only).
-        <strong>PWD, solo parents and pregnant residents cannot be listed yet</strong> because resident profiles do not record them.<?php endif; ?>
+        <?php if ($sector_ready): ?>Senior citizens (60 and above) and children under 5 are listed from each resident's birth date; PWD and solo parents from the checkboxes on the resident profile (active residents only). A resident in more than one group is listed once. <?= disaster_priority_visible() ? '"Priority" residents are flagged from the Health records for priority help; the reason is kept with the Health Workers and no health information is shown.' : '' ?><?php else: ?>Senior citizens (60 and above) and children under 5 are listed from each resident's birth date (active residents only).
+        <strong>PWD and solo parents cannot be listed yet</strong> because resident profiles do not record them.<?php endif; ?>
         <?php if ($unknown > 0): ?><?= e((string) $unknown) ?> active resident<?= $unknown === 1 ? ' has' : 's have' ?> no birth date and cannot be checked.<?php endif; ?>
     </div>
     <section class="dashboard-panel resident-list-panel">

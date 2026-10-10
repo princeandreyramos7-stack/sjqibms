@@ -6,16 +6,17 @@ const APP_FULL_NAME = 'Barangay San Jose Management System';
 const APP_TIMEZONE = 'Asia/Manila';
 
 // Passwords and keys for this server live in config/secrets.php, which is never uploaded over another server's copy:
-// the database login (DB_HOST, DB_NAME, DB_USER, DB_PASS) and the Semaphore API key. The defaults below are XAMPP's.
+// the database login (DB_HOST, DB_NAME, DB_USER, DB_PASS) and the Semaphore API key. The defaults below are the live
+// server's database login; a DB_* value set in secrets.php (for example on XAMPP) takes precedence over them.
 if (is_file(__DIR__ . '/secrets.php')) require __DIR__ . '/secrets.php';
 defined('DB_HOST') || define('DB_HOST', '127.0.0.1');
-defined('DB_NAME') || define('DB_NAME', 'sjqibms');
-defined('DB_USER') || define('DB_USER', 'root');
-defined('DB_PASS') || define('DB_PASS', '');
+defined('DB_NAME') || define('DB_NAME', 'u988863428_sjqibms_db');
+defined('DB_USER') || define('DB_USER', 'u988863428_sjqibms_user');
+defined('DB_PASS') || define('DB_PASS', 'Sjqibms_pass1');
 
 // Admin Access Gate (admin_gate.php): only a bcrypt hash of the access code is stored, never the code itself.
 // To change the code, run: php -r "echo password_hash('NEWCODE', PASSWORD_DEFAULT);" and paste the result here.
-const ADMIN_GATE_CODE_HASH = '$2y$10$B6YnMh0PWZAfV93hnGNX8ONuxbPAQbQZyIJWC9NwqO0EbeIpNeX0K';
+const ADMIN_GATE_CODE_HASH = '$2y$10$fjN0eFbQiKFTl.amUC5bduNkL30do4avihS.x6aEYl6VPXzfWbKSm';
 const ADMIN_GATE_MAX_ATTEMPTS = 5;        // failed codes before a lockout
 const ADMIN_GATE_LOCKOUT_SECONDS = 900;   // 15-minute lockout
 const ADMIN_GATE_PASS_SECONDS = 600;      // a passed gate is valid for 10 minutes

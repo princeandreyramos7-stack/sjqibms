@@ -129,13 +129,12 @@ $stat_value = static fn (?int $value): string => $value === null ? '—' : numbe
                             <span class="landing-login-arrow"><?= landing_icon('arrow-right') ?></span>
                         </a>
                         <p class="landing-login-label">Barangay staff <span class="landing-login-lock"><?= landing_icon('lock') ?>Access code required</span></p>
-                        <?php foreach (array_diff_key(staff_portals(), ['punong_barangay' => true]) as $key => $portal): // Punong Barangay is not offered on the homepage ?>
-                            <a class="landing-login-item" href="admin_gate.php?portal=<?= e($key) ?>" role="menuitem">
-                                <span class="landing-login-icon"><?= landing_icon($portal['icon']) ?></span>
-                                <span><strong><?= e($portal['title']) ?></strong><small><?= e($portal['short']) ?> login</small></span>
-                                <span class="landing-login-arrow"><?= landing_icon('arrow-right') ?></span>
-                            </a>
-                        <?php endforeach; ?>
+                        <?php // One entry for every staff office: the access code first (admin_gate.php), then the office list (staff_portal.php). ?>
+                        <a class="landing-login-item" href="admin_gate.php" role="menuitem">
+                            <span class="landing-login-icon"><?= landing_icon('shield') ?></span>
+                            <span><strong>Officials Portal</strong><small>Secretary, Treasurer, Officials, Health Workers &amp; Admin</small></span>
+                            <span class="landing-login-arrow"><?= landing_icon('arrow-right') ?></span>
+                        </a>
                     </div>
                 </div>
             <?php endif; ?>

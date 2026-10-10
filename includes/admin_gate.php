@@ -43,6 +43,19 @@ function admin_gate_clear(): void
     unset($_SESSION['admin_gate_pass'], $_SESSION['portal_login']);
 }
 
+// "Barangay Officials" on the website: one access code opens the staff login list (staff_portal.php) for
+// ADMIN_GATE_PASS_SECONDS. Choosing an office there issues the usual one-portal gate pass for its login page.
+function admin_gate_grant_hub(): void
+{
+    session_regenerate_id(true);
+    $_SESSION['admin_gate_hub_until'] = time() + ADMIN_GATE_PASS_SECONDS;
+}
+
+function admin_gate_hub_valid(): bool
+{
+    return (int) ($_SESSION['admin_gate_hub_until'] ?? 0) > time();
+}
+
 function admin_gate_ip_file(): string
 {
     $ip = (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown');

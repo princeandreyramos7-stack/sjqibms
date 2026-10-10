@@ -16,6 +16,11 @@ if ($request_id !== null) {
 // Same template choice as the details page: the approved template for the request's type, or — only when asked for with
 // sample=1 — the neutral, watermarked development sample. This page never changes a request's status.
 $official = $request !== null && ($_GET['sample'] ?? '') !== '1' ? documents_print_template($connection, (string) $request['document_type']) : null;
+// Without a request, ?format=<document type> previews that official format with its placeholders unfilled (Document Templates page).
+if ($request === null && isset($_GET['format'])) {
+    $official = documents_official_format_template((string) $_GET['format']);
+    if ($official === null) { http_response_code(404); exit('No official format exists for this document type.'); }
+}
 $is_sample = $official === null;
 if ($request !== null && $is_sample && ($_GET['sample'] ?? '') !== '1') { http_response_code(404); exit('No approved document template is available for this document type.'); }
 $template = $is_sample ? documents_sample_template() : (string) $official['body'];
@@ -40,7 +45,7 @@ if ($request !== null) security_log($auto_print ? 'document_print_opened' : 'doc
 <div class="doc-toolbar">
     <div class="doc-toolbar-title">
         <strong><?= $is_sample ? 'Development Preview — Not for Official Issuance' . ($request ? ' · ' . $request['document_type'] : '') : e($official['title'] . ' · v' . $official['version_no']) ?></strong>
-        <span><?= $request ? e($request['reference_code'] . ' · ' . residents_full_name($request)) : 'Placeholders shown without request data' ?></span>
+        <span><?= $request ? e($request['reference_code'] . ' · ' . residents_full_name($request)) : 'Template preview — the bracketed fields are filled from the resident\'s request when printed' ?></span>
     </div>
     <div class="doc-toolbar-actions">
         <a href="<?= e($back) ?>">&larr; Back</a>

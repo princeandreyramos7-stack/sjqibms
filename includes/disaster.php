@@ -21,8 +21,8 @@ function disaster_can_view(): bool
     return can_access_navigation('disaster');
 }
 
-// Names of vulnerable residents (seniors, young children, PWD, solo parents, pregnant): System Administrator, BDRRMC and
-// Secretary.
+// Names of vulnerable residents (seniors, young children, PWD, solo parents, health priority): System Administrator,
+// BDRRMC and Secretary.
 function disaster_can_view_vulnerable(): bool
 {
     return disaster_can_view() && !has_role('treasurer');

@@ -132,6 +132,7 @@
 /* PWD and Solo Parent groups (Vulnerable Residents). A resident can show several group badges. */
 .drr-group-pwd { background: #e6f3ef; color: #24684f; }
 .drr-group-solo_parent { background: #fbeee6; color: #8a4a22; }
+.drr-group-priority { background: #fdeceb; color: #a8443a; }
 .drr-group-cell { display: inline-flex; flex-wrap: wrap; gap: 4px; }
 
 /* Family picker with a priority group (Senior, Under 5, PWD, Solo Parent) before the Purok. */

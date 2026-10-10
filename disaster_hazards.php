@@ -124,7 +124,7 @@ require __DIR__ . '/layout/header.php';
                     </tbody>
                 </table>
             </div>
-            <p class="document-info-note">Families are the households in the Purok with at least one active member (Households). Vulnerable residents are active senior citizens (60+), children under 5, PWD and solo parents (Residents)<?= disaster_pregnant_visible() ? ', and pregnant residents (Health module)' : '' ?>; a resident in two groups is counted in both groups but once in the total.</p>
+            <p class="document-info-note">Families are the households in the Purok with at least one active member (Households). Vulnerable residents are active senior citizens (60+), children under 5, PWD and solo parents (Residents)<?= disaster_priority_visible() ? ', and residents flagged "Priority" from the Health records' : '' ?>; a resident in two groups is counted in both groups but once in the total.</p>
         </section>
 
         <section class="dashboard-panel resident-list-panel" style="margin-top: 24px;">

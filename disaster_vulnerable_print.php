@@ -78,7 +78,7 @@ residents_audit($connection, 'disaster', 0, 'disaster_vulnerable_printed', ['row
                 <?php endforeach; ?>
             </table>
         <?php endif; ?>
-        <p class="drp-footnote">Taken from the Residents records (active residents only). Ages are computed from the birth date on the day of printing.<?= $sector_ready ? ' PWD and solo parents are taken from the resident profiles. A resident in more than one group is listed once.' . (disaster_pregnant_visible() ? ' Pregnant residents are taken from the Health module (group only, no health details).' : '') : ' PWD, solo parents and pregnant residents are not included because resident profiles do not record them.' ?></p>
+        <p class="drp-footnote">Taken from the Residents records (active residents only). Ages are computed from the birth date on the day of printing.<?= $sector_ready ? ' PWD and solo parents are taken from the resident profiles. A resident in more than one group is listed once.' . (disaster_priority_visible() ? ' "Priority" residents are flagged from the Health records for priority help (no health information is shown).' : '') : ' PWD and solo parents are not included because resident profiles do not record them.' ?></p>
     </article>
 </main>
 <script>

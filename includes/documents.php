@@ -370,6 +370,9 @@ function documents_official_format_files(): array
     return [
         'Barangay Clearance' => ['file' => 'barangay_clearance.html', 'title' => 'Barangay Clearance — Official Format'],
         'Certificate of Indigency' => ['file' => 'certificate_of_indigency.html', 'title' => 'Certificate of Indigency — Official Format'],
+        'Business Clearance' => ['file' => 'business_clearance.html', 'title' => 'Business Clearance — Official Format'],
+        'Certificate of Good Moral Character' => ['file' => 'good_moral_certification.html', 'title' => 'Good Moral Certification — Official Format'],
+        'Certificate of Residency' => ['file' => 'certificate_of_residency.html', 'title' => 'Certificate of Residency — Official Format'],
     ];
 }
 

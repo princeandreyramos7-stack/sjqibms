@@ -261,6 +261,14 @@ body.landing { margin: 0; background: var(--lp-page); color: var(--lp-ink); font
 .gate-assurances li { display: inline-flex; align-items: center; gap: 6px; color: rgba(255, 255, 255, .7); font-size: 12.5px; font-weight: 600; }
 .gate-assurances svg { color: var(--lp-gold); }
 .gate-foot { margin: 0; color: rgba(255, 255, 255, .5); font-size: 12.5px; text-align: center; }
+/* Barangay Officials: staff login list after the access code (staff_portal.php) */
+.staff-hub-list { display: grid; gap: 8px; text-align: left; }
+.staff-hub-list .landing-login-item { padding: 12px 14px; border: 1px solid rgba(255, 255, 255, .14); background: rgba(255, 255, 255, .07); color: #fff; text-decoration: none; }
+.staff-hub-list .landing-login-item:hover, .staff-hub-list .landing-login-item:focus-visible { border-color: rgba(226, 176, 74, .6); background: rgba(255, 255, 255, .14); }
+.staff-hub-list .landing-login-item small { color: rgba(255, 255, 255, .66); }
+.staff-hub-list .landing-login-icon svg, .staff-hub-list .landing-login-arrow svg { width: 20px; height: 20px; }
+.staff-hub-list .landing-login-arrow { display: grid; color: var(--lp-gold); }
+.gate-foot-note { margin: 18px 0 0; color: rgba(255, 255, 255, .55); font-size: 12px; }
 .gate-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Staff Portal office selection (staff_portal.php) */

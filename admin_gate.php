@@ -9,32 +9,39 @@ require_once __DIR__ . '/includes/security_log.php';
 if (is_authenticated()) {
     redirect('dashboard.php');
 }
-// The gate always protects one specific staff portal; the code is asked every time, even if passed earlier.
+// Without ?portal the gate protects the "Officials Portal" staff login list (staff_portal.php); with ?portal it
+// protects that one staff login page (used when a login page sends the visitor back). The code is asked every time.
 $portal_key = (string) ($_GET['portal'] ?? '');
-$portal = staff_portals()[$portal_key] ?? null;
-if ($portal === null) {
+$portal = $portal_key === '' ? null : (staff_portals()[$portal_key] ?? null);
+if ($portal_key !== '' && $portal === null) {
     redirect('index.php');
 }
-$self = 'admin_gate.php?portal=' . $portal_key;
+$is_hub = $portal === null;
+$self = $is_hub ? 'admin_gate.php' : 'admin_gate.php?portal=' . $portal_key;
+$log_portal = $is_hub ? 'barangay_officials' : $portal_key;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf_token($_POST['csrf_token'] ?? null)) {
         flash('gate_error', 'Your session expired. Please enter the access code again.');
     } elseif (($remaining = admin_gate_lock_remaining()) > 0) {
         flash('gate_error', 'Too many incorrect attempts. Access is temporarily locked.');
-        security_log('admin_gate_locked', null, ['portal' => $portal_key]);
+        security_log('admin_gate_locked', null, ['portal' => $log_portal]);
     } else {
         $digits = $_POST['code'] ?? [];
         $code = is_array($digits) ? implode('', array_map(static fn ($digit): string => substr(preg_replace('/\D/', '', (string) $digit) ?? '', 0, 1), array_slice($digits, 0, 6))) : '';
         if (admin_gate_verify($code)) {
             admin_gate_reset_failures();
+            security_log('admin_gate_passed', null, ['portal' => $log_portal]);
+            if ($is_hub) {
+                admin_gate_grant_hub();
+                redirect('staff_portal.php');
+            }
             admin_gate_grant($portal_key);
-            security_log('admin_gate_passed', null, ['portal' => $portal_key]);
             redirect('login.php?portal=' . $portal_key);
         }
         admin_gate_record_failure();
         // The entered code is never recorded.
-        security_log('admin_gate_failed', null, ['portal' => $portal_key, 'locked' => admin_gate_lock_remaining() > 0]);
+        security_log('admin_gate_failed', null, ['portal' => $log_portal, 'locked' => admin_gate_lock_remaining() > 0]);
         $left = admin_gate_attempts_left();
         flash('gate_error', admin_gate_lock_remaining() > 0 ? 'Too many incorrect attempts. Access is temporarily locked.' : 'Incorrect access code. ' . $left . ' attempt' . ($left === 1 ? '' : 's') . ' remaining.');
     }
@@ -52,7 +59,7 @@ $locked = $lock_remaining > 0;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>Admin Access Gate | Barangay San Jose</title>
+    <title><?= $is_hub ? 'Officials Portal' : 'Admin Access Gate' ?> | Barangay San Jose</title>
     <link rel="icon" href="assets/img/barangay-san-jose-logo.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,8 +75,8 @@ $locked = $lock_remaining > 0;
             <span class="gate-shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><rect x="9" y="10.5" width="6" height="5" rx="1"/><path d="M10.5 10.5V9a1.5 1.5 0 0 1 3 0v1.5"/></svg></span>
         </div>
         <span class="gate-eyebrow"><span class="landing-dot"></span>Restricted Area</span>
-        <h1 id="gate-title">Admin Access Gate</h1>
-        <p class="gate-sub">Enter the 6-digit administrative access code to continue to the <strong><?= e($portal['title']) ?></strong> login.</p>
+        <h1 id="gate-title"><?= $is_hub ? 'Officials Portal' : 'Admin Access Gate' ?></h1>
+        <p class="gate-sub">Enter the 6-digit access code to continue to the <strong><?= $is_hub ? 'barangay staff login' : e($portal['title']) . ' login' ?></strong>.</p>
 
         <?php if ($locked): ?>
             <div class="gate-alert is-locked" role="alert">
