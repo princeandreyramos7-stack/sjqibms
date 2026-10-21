@@ -801,7 +801,9 @@ a.document-quick-card:focus-visible { outline: 3px solid rgba(36, 107, 85, .25);
 .resident-table .doc-action-group > .doc-action-form:last-child > .btn { flex: 1 1 auto; }
 .resident-card .doc-action-group { margin-top: 10px; }
 /* Shared confirmation dialog extras (record summary, checklist, reason, blocked notice) */
-.announcement-confirm-dialog { position: relative; }
+/* Fixed and centred on the screen (not the top of the page), so it is visible wherever the page is scrolled. Fixed also
+   keeps it the containing block of the × button. */
+.announcement-confirm-dialog { position: fixed; inset: 0; height: fit-content; margin: auto; }
 .confirm-dialog-close { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 22px; line-height: 1; }
 .confirm-dialog-close:hover, .confirm-dialog-close:focus-visible { background: var(--page); color: var(--ink); }
 .announcement-confirm-dialog:has(.confirm-dialog-close:not([hidden])) h2 { padding-right: 32px; }
