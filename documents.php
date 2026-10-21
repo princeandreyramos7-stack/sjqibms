@@ -55,7 +55,6 @@ $action_return = $state === [] ? 'list' : http_build_query($state);
 $actions = static fn (array $record): string => documents_action_buttons($connection, $record, $action_return);
 $first_shown = $total === 0 ? 0 : ($page - 1) * $per_page + 1;
 $last_shown = min($total, $page * $per_page);
-$featured = documents_featured_templates($connection);
 
 $render_results = static function () use ($records, $total, $first_shown, $last_shown, $total_pages, $page, $page_url, $view_url, $actions): void {
     if ($records === []): ?>
@@ -110,35 +109,13 @@ require __DIR__ . '/layout/header.php';
     <!-- 1. Title and primary actions -->
     <div class="page-heading">
         <div><h1>Documents</h1><p>Document requests, templates, and processing for Barangay San Jose.</p></div>
-        <?php if ($can_create): ?><a class="btn btn-primary announcements-new-btn" href="document_request_form.php">New Document Request</a><?php endif; ?>
+        <div class="doc-action-group">
+            <a class="btn btn-light resident-action-btn" href="document_templates.php">View All Templates</a>
+            <?php if ($can_create): ?><a class="btn btn-primary announcements-new-btn" href="document_request_form.php">New Document Request</a><?php endif; ?>
+        </div>
     </div>
     <?php if ($success = flash('document_success')): ?><div class="announcement-flash" role="status"><?= e($success) ?></div><?php endif; ?>
     <?php if ($failure = flash('document_error')): ?><div class="dashboard-status warning" role="alert"><?= e($failure) ?></div><?php endif; ?>
-
-    <!-- 2. Frequently Used Templates -->
-    <section class="documents-section" aria-labelledby="featured-heading">
-        <div class="section-heading documents-section-head">
-            <div><h2 id="featured-heading">Frequently Used Templates</h2><p>Quickly create new document requests using the most commonly used templates.</p></div>
-            <a class="btn btn-light btn-sm resident-action-btn" href="document_templates.php">View All Templates</a>
-        </div>
-        <?php if ($featured !== []): ?>
-            <div class="document-quick-grid">
-                <?php foreach ($featured as $template): ?>
-                    <?php $card_body = '<span class="document-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><span class="document-quick-text"><strong>' . e($template['document_type']) . '</strong><small>' . e($template['title']) . '</small></span><span class="document-quick-arrow" aria-hidden="true">&rarr;</span>'; ?>
-                    <?php if ($can_create): ?>
-                        <a class="document-quick-card" href="document_request_form.php?template=<?= e((string) $template['id']) ?>" aria-label="New <?= e($template['document_type']) ?> request"><?= $card_body ?></a>
-                    <?php else: ?>
-                        <div class="document-quick-card is-static"><?= $card_body ?></div>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <div class="document-quick-empty">
-                <span class="document-quick-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg></span>
-                <p><strong>No featured document templates are available yet.</strong><?php if (!$templates_installed): ?> <span>Approved templates appear here after the Documents database update is approved and imported.</span><?php endif; ?></p>
-            </div>
-        <?php endif; ?>
-    </section>
 
     <!-- 4. Status summary -->
     <section class="document-summary" aria-label="Request summary">
