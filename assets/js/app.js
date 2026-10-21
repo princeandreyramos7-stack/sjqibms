@@ -1021,6 +1021,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // closes with its × button or by itself (success after 6 s, error after 10 s; the timer pauses while hovered).
     const flashes = document.querySelectorAll('main .announcement-flash, main .dashboard-status.warning[role="alert"]');
     if (flashes.length) {
+        // The page also scrolls back up to the top (where the message belongs), unless the address points to a section (#…).
+        // The browser restores the old scroll position when the page loads, so this runs after the load event.
+        if (!window.location.hash) {
+            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+            const toTop = () => window.setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 60);
+            if (document.readyState === 'complete') toTop(); else window.addEventListener('load', toTop, { once: true });
+        }
         const stack = document.createElement('div');
         stack.className = 'toast-stack';
         document.body.appendChild(stack);
