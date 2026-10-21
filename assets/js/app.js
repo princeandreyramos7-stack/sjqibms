@@ -1014,4 +1014,40 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('select[data-auto-submit]').forEach((select) => {
         select.addEventListener('change', () => { if (select.value !== '' && select.form) select.form.submit(); });
     });
+
+    // ── Confirmation messages pop up at the top of the screen ─────────────────
+    // The one-time success (.announcement-flash) and error (.dashboard-status.warning[role=alert]) messages shown after an
+    // action are moved into a toast fixed at the top, so they are seen without scrolling on phones and laptops. A toast
+    // closes with its × button or by itself (success after 6 s, error after 10 s; the timer pauses while hovered).
+    const flashes = document.querySelectorAll('main .announcement-flash, main .dashboard-status.warning[role="alert"]');
+    if (flashes.length) {
+        const stack = document.createElement('div');
+        stack.className = 'toast-stack';
+        document.body.appendChild(stack);
+        flashes.forEach((message) => {
+            const isError = message.matches('[role="alert"]');
+            const toast = document.createElement('div');
+            toast.className = 'toast' + (isError ? ' is-error' : ' is-success');
+            toast.setAttribute('role', isError ? 'alert' : 'status');
+            const text = document.createElement('div');
+            text.className = 'toast-text';
+            while (message.firstChild) text.appendChild(message.firstChild);
+            const close = document.createElement('button');
+            close.type = 'button';
+            close.className = 'toast-close';
+            close.setAttribute('aria-label', 'Close message');
+            close.textContent = '×';
+            toast.append(text, close);
+            message.remove();
+            stack.appendChild(toast);
+            let timer = null;
+            const hide = () => { toast.classList.add('is-leaving'); window.setTimeout(() => toast.remove(), 250); };
+            const start = () => { timer = window.setTimeout(hide, isError ? 10000 : 6000); };
+            close.addEventListener('click', hide);
+            toast.addEventListener('mouseenter', () => window.clearTimeout(timer));
+            toast.addEventListener('mouseleave', start);
+            requestAnimationFrame(() => toast.classList.add('is-visible'));
+            start();
+        });
+    }
 });

@@ -224,6 +224,18 @@ a { color: inherit; text-decoration: none; }
 .announcement-delete-btn { border: 1px solid #efc6c1; background: #fff; color: #b42318; }
 .announcement-delete-btn:hover, .announcement-delete-btn:focus-visible { border-color: #b42318; background: #fdf1f0; color: #b42318; }
 .announcement-flash { margin: -9px 0 18px; padding: 11px 14px; border: 1px solid #cfe3d8; border-radius: 7px; background: var(--green-soft); color: var(--green); font-size: 12px; font-weight: 600; }
+/* Confirmation toasts (app.js moves the page's success / error message here so it shows without scrolling) */
+.toast-stack { position: fixed; z-index: 1000; top: 16px; left: 50%; display: grid; gap: 8px; width: min(480px, calc(100vw - 32px)); transform: translateX(-50%); pointer-events: none; }
+.toast { display: flex; align-items: flex-start; gap: 10px; padding: 13px 12px 13px 16px; border: 1px solid #cfe3d8; border-radius: 10px; background: #fff; box-shadow: 0 12px 30px rgba(21, 63, 53, .2); color: var(--green); font-size: 13.5px; font-weight: 600; line-height: 1.45; opacity: 0; transform: translateY(-14px); transition: opacity .25s ease, transform .25s ease; pointer-events: auto; }
+.toast.is-success { border-left: 4px solid var(--green); }
+.toast.is-error { border-color: #f0d8a8; border-left: 4px solid #d69a2a; color: #7a5a1f; }
+.toast.is-visible { opacity: 1; transform: none; }
+.toast.is-leaving { opacity: 0; transform: translateY(-14px); }
+.toast-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.toast-text a { color: inherit; text-decoration: underline; }
+.toast-close { flex: 0 0 auto; width: 28px; height: 28px; margin: -4px -2px -4px 0; border: 0; border-radius: 6px; background: transparent; color: inherit; cursor: pointer; font-size: 20px; line-height: 1; }
+.toast-close:hover, .toast-close:focus-visible { background: rgba(0, 0, 0, .06); }
+@media (prefers-reduced-motion: reduce) { .toast, .toast.is-leaving { transition: none; transform: none; } }
 .announcement-confirm-dialog { width: min(460px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 24px; overflow-y: auto; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: var(--shadow); color: var(--ink); }
 .announcement-confirm-dialog::backdrop { background: rgba(21, 63, 53, .45); }
 .announcement-confirm-dialog h2 { margin: 0 0 12px; font-size: 17px; line-height: 1.4; }
