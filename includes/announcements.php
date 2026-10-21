@@ -73,12 +73,22 @@ function announcements_officials_audience_ready(PDO $connection): bool
             try {
                 $connection->exec("ALTER TABLE announcements MODIFY COLUMN audience ENUM('" . implode("', '", $values) . "') NOT NULL DEFAULT 'public'");
                 $ready = str_contains($read(), "'barangay_officials'");
-            } catch (PDOException) {
+                if (!$ready) $GLOBALS['announcements_officials_audience_problem'] = 'The database was updated but still does not list barangay_officials (' . $read() . ').';
+            } catch (PDOException $exception) {
                 $ready = false;   // e.g. the database account may not change tables: the option simply stays hidden
+                $GLOBALS['announcements_officials_audience_problem'] = 'The database refused the update: ' . $exception->getMessage();
             }
+        } elseif (!$ready) {
+            $GLOBALS['announcements_officials_audience_problem'] = 'The audience column holds values this update does not know, so it was not changed: ' . $type;
         }
     }
     return $ready;
+}
+
+// Why "Barangay Officials" is not offered (null when it is, or when nothing was tried). Shown to the System Administrator.
+function announcements_officials_audience_problem(): ?string
+{
+    return $GLOBALS['announcements_officials_audience_problem'] ?? null;
 }
 
 // Options for the Target Audience dropdown, in the confirmed order. When editing an announcement that still uses an
