@@ -67,7 +67,11 @@ require __DIR__ . '/header.php';
 <div class="app-shell"><?php require __DIR__ . '/sidebar.php'; ?><div class="app-main"><?php require __DIR__ . '/topbar.php'; ?>
 <main class="content">
     <div class="page-heading">
-        <div><h1><?= e($selected_module['label']) ?></h1><p><?= e($sample['intro']) ?></p></div>
+        <div><h1><?= e($selected_module['label']) ?></h1><p><?= e($sample['intro']) ?></p>
+            <?php if ($module_key === 'projects'): // Special Project: its destination (another website) is added later. ?>
+                <button class="btn btn-primary special-project-btn" type="button" data-special-project>Special Project</button>
+            <?php endif; ?>
+        </div>
     </div>
     <div class="sample-notice" role="note">
         <span class="sample-notice-badge">Sample data</span>
