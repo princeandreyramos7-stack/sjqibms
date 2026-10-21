@@ -58,12 +58,25 @@ function announcements_audience_label(string $audience): string
 
 // True once announcements.audience accepts 'barangay_officials'. Until then the option is not offered, because a
 // non-strict database would silently store an unknown value as ''.
+// If the value is missing, it is added once here (the same change as migration
+// 20260925_announcement_barangay_officials_audience), so deploying the code is enough. The column is changed only when
+// every value it holds now is in the new list, so no existing value can be lost; otherwise nothing is changed.
 function announcements_officials_audience_ready(PDO $connection): bool
 {
     static $ready = null;
     if ($ready === null) {
-        $type = $connection->query("SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'announcements' AND COLUMN_NAME = 'audience'")->fetchColumn();
-        $ready = is_string($type) && str_contains($type, "'barangay_officials'");
+        $read = static fn (): string => (string) $connection->query("SELECT COLUMN_TYPE FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'announcements' AND COLUMN_NAME = 'audience'")->fetchColumn();
+        $type = $read();
+        $ready = str_contains($type, "'barangay_officials'");
+        $values = ['public', 'all_residents', 'purok', 'selected_users', 'kagawads', 'all_staff', 'barangay_officials'];
+        if (!$ready && preg_match_all("/'([^']*)'/", $type, $current) && array_diff($current[1], $values) === []) {
+            try {
+                $connection->exec("ALTER TABLE announcements MODIFY COLUMN audience ENUM('" . implode("', '", $values) . "') NOT NULL DEFAULT 'public'");
+                $ready = str_contains($read(), "'barangay_officials'");
+            } catch (PDOException) {
+                $ready = false;   // e.g. the database account may not change tables: the option simply stays hidden
+            }
+        }
     }
     return $ready;
 }
