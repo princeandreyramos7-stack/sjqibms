@@ -160,7 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h3 class="portal-register-title" id="portal-register-title">Don't have an account yet?</h3>
                     <a class="portal-register-btn" href="register.php"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6M19 8v6M16 11h6"/></svg>Create an account</a>
                 </section>
-                <a class="portal-switch is-centered" href="index.php">Not a resident? Choose another portal</a>
                 <p class="portal-note is-centered">Forgot your password or need help registering? Visit the Barangay Hall during office hours (<?= e(defined('BARANGAY_OFFICE_HOURS') ? BARANGAY_OFFICE_HOURS : 'Monday to Friday, 8:00 AM – 5:00 PM') ?>).</p>
             <?php else: ?>
                 <a class="portal-switch" href="index.php">Not a <?= e($portal['title']) ?>? Choose another portal</a>
