@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="landing portal">
 <div class="portal-page">
     <section class="portal-visual" aria-hidden="true">
-        <a class="portal-brand" href="index.php" tabindex="-1"><img src="assets/img/barangay-san-jose-logo.jpg" alt=""><span><strong>Barangay San Jose</strong><small>Quirino, Isabela</small></span></a>
+        <a class="portal-brand" href="<?= $portal['gate'] ? 'index.php' : 'resident_home.php' ?>" tabindex="-1"><img src="assets/img/barangay-san-jose-logo.jpg" alt=""><span><strong>Barangay San Jose</strong><small>Quirino, Isabela</small></span></a>
         <div class="portal-visual-copy">
             <span class="landing-hero-eyebrow"><span class="landing-dot"></span><?= e($portal['title']) ?> Portal</span>
             <h1>Connected service for a stronger community.</h1>
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
     <main class="portal-form-area">
         <div class="portal-card">
-            <a class="portal-back" href="index.php"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back to website</a>
+            <a class="portal-back" href="<?= $portal['gate'] ? 'index.php' : 'resident_home.php' ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Back to website</a>
             <div class="portal-logo-row">
                 <img class="portal-logo" src="assets/img/barangay-san-jose-logo.jpg" alt="Barangay San Jose seal">
                 <span class="portal-logo-name">SJQIBMS</span>

@@ -48,6 +48,8 @@ try {
 
 $signed_in = is_authenticated();
 $year = date('Y');
+// resident_home.php shows this same page for residents: its Login menu offers only the Resident Portal (no staff portal).
+$resident_landing = defined('LANDING_RESIDENT_ONLY');
 
 function landing_icon(string $name): string
 {
@@ -123,11 +125,13 @@ $stat_value = static fn (?int $value): string => $value === null ? '—' : numbe
                     <button class="landing-login-btn" type="button" aria-label="Login options" aria-haspopup="true" aria-expanded="false" aria-controls="login-menu" data-login-toggle><?= landing_icon('login') ?><span>Login</span><span class="landing-caret"><?= landing_icon('chevron-down') ?></span></button>
                     <div class="landing-login-menu" id="login-menu" role="menu" hidden data-login-panel>
                         <p class="landing-login-label">For residents</p>
-                        <a class="landing-login-item" href="login.php?portal=resident" role="menuitem">
+                        <?php // Main page: Resident Portal opens the residents' copy of this page; there it opens the resident login. ?>
+                        <a class="landing-login-item" href="<?= $resident_landing ? 'login.php?portal=resident' : 'resident_home.php' ?>" role="menuitem">
                             <span class="landing-login-icon is-resident"><?= landing_icon('users') ?></span>
                             <span><strong>Resident Portal</strong><small>Request documents &amp; track requests</small></span>
                             <span class="landing-login-arrow"><?= landing_icon('arrow-right') ?></span>
                         </a>
+                        <?php if (!$resident_landing): ?>
                         <p class="landing-login-label">Barangay staff <span class="landing-login-lock"><?= landing_icon('lock') ?>Access code required</span></p>
                         <?php // One entry for every staff office: the access code first (admin_gate.php), then the office list (staff_portal.php). ?>
                         <a class="landing-login-item" href="admin_gate.php" role="menuitem">
@@ -135,6 +139,7 @@ $stat_value = static fn (?int $value): string => $value === null ? '—' : numbe
                             <span><strong>Officials Portal</strong><small>Secretary, Treasurer, Officials, Health Workers &amp; Admin</small></span>
                             <span class="landing-login-arrow"><?= landing_icon('arrow-right') ?></span>
                         </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endif; ?>

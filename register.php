@@ -33,7 +33,7 @@ $select = static fn (string $name, string $label, string $placeholder, array $op
     <div class="rg-test-banner" role="note"><strong>TEST MODE</strong> No real text messages are sent. The OTP is shown on the screen.</div>
 <?php endif; ?>
 <header class="rg-header">
-    <a class="rg-brand" href="index.php"><img src="assets/img/barangay-san-jose-logo.jpg" alt="" width="36" height="36"><span><strong><?= e(BARANGAY_NAME) ?></strong><small><?= e(BARANGAY_LOCATION) ?></small></span></a>
+    <a class="rg-brand" href="resident_home.php"><img src="assets/img/barangay-san-jose-logo.jpg" alt="" width="36" height="36"><span><strong><?= e(BARANGAY_NAME) ?></strong><small><?= e(BARANGAY_LOCATION) ?></small></span></a>
 </header>
 <main class="rg-main">
     <?php if (!$ready): ?>
