@@ -114,8 +114,8 @@ function disaster_tel_link(?string $number): string
 function disaster_phone_error(string $value, bool $required, string $label = 'contact number'): ?string
 {
     if ($value === '') return $required ? 'Enter the ' . $label . '.' : null;
-    $digits = preg_replace('/\D/', '', $value) ?? '';
-    if (!preg_match('/^[0-9+(][0-9()\-\s]*$/', $value) || strlen($digits) < 3 || strlen($digits) > 15 || mb_strlen($value) > 30) return 'Enter a valid ' . $label . ' (digits, spaces, dashes, parentheses; e.g. 0917 123 4567 or 911).';
+    // Numbers only, 3 to 11 digits: mobile numbers (09171234567), landlines and short hotlines such as 911.
+    if (!preg_match('/^\d{3,11}$/', $value)) return 'Enter the ' . $label . ' using numbers only, 3 to 11 digits (for example 09171234567 or 911).';
     return null;
 }
 

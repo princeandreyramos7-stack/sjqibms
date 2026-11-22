@@ -58,7 +58,7 @@ function password_change_guard(): void
     redirect(has_role('super_admin') ? 'account_password.php' : 'my_password.php');
 }
 
-// Health Worker portal: a Health Worker may open only these pages (Dashboard, Health, Inventory view, Announcements,
+// Health Worker portal: a Health Worker may open only these pages (Dashboard, Health, Inventory view, Announcements, Projects (view),
 // Document Requests, My Household, Disaster Info, and their own account pages). Any other page, even typed in the address bar, sends them to Health.
 // Each page still checks its own permissions as well.
 function role_page_allowlist(string $role): ?array
@@ -76,6 +76,7 @@ function role_page_allowlist(string $role): ?array
             'announcements.php', 'announcement_view.php', 'announcement_form.php', 'announcement_action.php',
             // As residents have (they live in the barangay too): their own documents and household, and Disaster Info.
             'resident_documents.php', 'document_view.php', 'my_household.php', 'disaster_info.php',
+            'projects.php',   // Projects: view only (projects_can_manage() is false for Health Workers)
         ],
         default => null,
     };

@@ -66,7 +66,7 @@ require __DIR__ . '/layout/header.php';
             <legend>Contact</legend>
             <div class="resident-grid">
                 <div><label class="form-label" for="contact_person">Contact person</label><input class="form-control<?= $field_class('contact_person') ?>" id="contact_person" name="contact_person" maxlength="150" value="<?= e($val('contact_person')) ?>" data-summary-label="Contact person"><?= $field_error('contact_person') ?></div>
-                <div><label class="form-label" for="contact_number">Contact number</label><input class="form-control<?= $field_class('contact_number') ?>" type="tel" id="contact_number" name="contact_number" maxlength="30" value="<?= e($val('contact_number')) ?>" placeholder="e.g. 0917 123 4567" data-summary-label="Contact number"><?= $field_error('contact_number') ?></div>
+                <div><label class="form-label" for="contact_number">Contact number</label><input class="form-control<?= $field_class('contact_number') ?>" type="tel" id="contact_number" name="contact_number" maxlength="11" inputmode="numeric" pattern="[0-9]{3,11}" title="Numbers only, 3 to 11 digits" data-digits-only value="<?= e($val('contact_number')) ?>" placeholder="e.g. 09171234567" data-summary-label="Contact number"><?= $field_error('contact_number') ?></div>
             </div>
         </fieldset>
         <div class="form-actions">

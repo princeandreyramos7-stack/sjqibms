@@ -433,8 +433,8 @@ function inventory_valid_date(string $value): ?DateTimeImmutable
 function inventory_contact_error(string $contact): ?string
 {
     if ($contact === '') return null;
-    $digits = preg_replace('/\D/', '', $contact) ?? '';
-    return mb_strlen($contact) > 30 || !preg_match('/^\+?[0-9][0-9\s()\-]*$/', $contact) || strlen($digits) < 7 || strlen($digits) > 15 ? 'Enter a valid contact number, for example 09171234567.' : null;
+    // Mobile number: exactly 11 digits starting with 09, numbers only.
+    return preg_match('/^09\d{9}$/', $contact) ? null : 'Enter an 11-digit mobile number starting with 09, numbers only (for example 09171234567).';
 }
 
 function inventory_validate_borrow(array $input, int $on_hand): array

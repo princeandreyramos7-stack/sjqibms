@@ -51,7 +51,7 @@ function navigation_groups(): array
                 ['key' => 'officials', 'label' => 'Barangay Officials', 'icon' => 'badge', 'href' => 'officials.php', 'roles' => ['super_admin', 'secretary']],
                 // Financial Management: Treasurer, Punong Barangay, and System Administrator (read-only; see includes/finance.php).
                 ['key' => 'finance', 'label' => 'Financial Management', 'icon' => 'wallet', 'href' => 'finance.php', 'roles' => ['treasurer', 'punong_barangay', 'super_admin']],
-                ['key' => 'projects', 'label' => 'Projects', 'icon' => 'briefcase', 'href' => 'module.php?module=projects', 'roles' => ['super_admin', 'treasurer', 'official']],
+                ['key' => 'projects', 'label' => 'Projects', 'icon' => 'briefcase', 'href' => 'projects.php', 'roles' => ['super_admin', 'secretary', 'treasurer', 'official', 'health_worker', 'resident']],
                 ['key' => 'inventory', 'label' => 'Inventory', 'icon' => 'archive', 'href' => 'inventory.php', 'roles' => ['super_admin', 'health_worker']],
             ],
         ],

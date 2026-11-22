@@ -35,6 +35,9 @@ if ($module_key === 'reports') {
 if ($module_key === 'officials') {
     redirect('officials.php');
 }
+if ($module_key === 'projects') {
+    redirect('projects.php');
+}
 if ($module_key === 'audit') {
     redirect('audit_logs.php');
 }

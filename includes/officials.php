@@ -118,8 +118,8 @@ function officials_validate(PDO $connection, array $input): array
     if ($values['service_type'] === 'elected' && $values['term_start_year'] === '' && !isset($errors['term_start_year'])) $errors['term_start_year'] = 'Enter the start year of the term.';
     if ($values['service_type'] === 'elected' && $values['term_end_year'] === '' && !isset($errors['term_end_year'])) $errors['term_end_year'] = 'Enter the end year of the term.';
     if ($values['contact_number'] !== '') {
-        $digits = preg_replace('/\D/', '', $values['contact_number']) ?? '';
-        if (mb_strlen($values['contact_number']) > 30 || !preg_match('/^\+?[0-9][0-9\s()\-]*$/', $values['contact_number']) || strlen($digits) < 7 || strlen($digits) > 15) $errors['contact_number'] = 'Enter a valid contact number, for example 09171234567 or +63 917 123 4567.';
+        // Mobile number: exactly 11 digits starting with 09, numbers only.
+        if (!preg_match('/^09\d{9}$/', $values['contact_number'])) $errors['contact_number'] = 'Enter an 11-digit mobile number starting with 09, numbers only (for example 09171234567).';
     }
     if (!array_key_exists($values['status'], officials_status_labels())) $errors['status'] = 'Select a valid status.';
     if ($values['user_id'] !== '') {

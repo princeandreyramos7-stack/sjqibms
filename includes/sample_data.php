@@ -11,25 +11,6 @@ declare(strict_types=1);
 function sample_data_modules(): array
 {
     return [
-        'projects' => [
-            'intro' => 'Barangay development projects and programs.',
-            'columns' => ['Project', 'Category', 'Budget', 'Start', 'Target End', 'Status'],
-            'tones' => ['Planned' => 'pending', 'Ongoing' => 'moved', 'Completed' => 'active', 'Suspended' => 'inactive'],
-            'rows' => [
-                ['Purok 3 drainage improvement', 'Infrastructure', '₱450,000', 'Aug 01, 2026', 'Nov 30, 2026', 'Ongoing'],
-                ['Solar streetlights – main road', 'Infrastructure', '₱380,000', 'Oct 01, 2026', 'Dec 15, 2026', 'Planned'],
-                ['Community garden program', 'Agriculture', '₱60,000', 'Jun 15, 2026', 'Sep 15, 2026', 'Completed'],
-                ['Farm-to-market road concreting', 'Infrastructure', '₱1,200,000', 'Jul 01, 2026', 'Jan 31, 2027', 'Ongoing'],
-                ['Senior citizens wellness program', 'Health', '₱75,000', 'Sep 01, 2026', 'Dec 31, 2026', 'Ongoing'],
-                ['Barangay hall repainting', 'Maintenance', '₱90,000', 'May 01, 2026', 'Jun 30, 2026', 'Completed'],
-                ['Youth basketball league', 'Sports', '₱40,000', 'Oct 10, 2026', 'Nov 20, 2026', 'Planned'],
-                ['Water system rehabilitation', 'Utilities', '₱650,000', 'Apr 01, 2026', 'Oct 31, 2026', 'Suspended'],
-                ['Livelihood training – dressmaking', 'Livelihood', '₱55,000', 'Aug 15, 2026', 'Sep 30, 2026', 'Ongoing'],
-                ['Day care center renovation', 'Education', '₱280,000', 'Mar 01, 2026', 'Jun 30, 2026', 'Completed'],
-                ['CCTV installation – key areas', 'Peace & Order', '₱210,000', 'Nov 01, 2026', 'Dec 31, 2026', 'Planned'],
-                ['Tree planting activity', 'Environment', '₱15,000', 'Jul 20, 2026', 'Jul 20, 2026', 'Completed'],
-            ],
-        ],
         'registrations' => [
             'intro' => 'Online resident and personnel registration applications.',
             'columns' => ['Application No.', 'Applicant', 'Type', 'Purok', 'Submitted', 'Status'],

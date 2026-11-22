@@ -1015,6 +1015,18 @@ document.addEventListener('DOMContentLoaded', () => {
         select.addEventListener('change', () => { if (select.value !== '' && select.form) select.form.submit(); });
     });
 
+    // Number-only fields (mobile numbers): letters, spaces and symbols are removed as they are typed or pasted, and the
+    // value is cut to the field's maxlength. The server checks the same rule.
+    document.querySelectorAll('input[data-digits-only]').forEach((input) => {
+        const clean = () => {
+            const max = input.maxLength > 0 ? input.maxLength : Infinity;
+            const digits = input.value.replace(/\D/g, '').slice(0, max);
+            if (digits !== input.value) input.value = digits;
+        };
+        input.addEventListener('input', clean);
+        clean();
+    });
+
     // ── Confirmation messages pop up at the top of the screen ─────────────────
     // The one-time success (.announcement-flash) and error (.dashboard-status.warning[role=alert]) messages shown after an
     // action are moved into a toast fixed at the top, so they are seen without scrolling on phones and laptops. A toast

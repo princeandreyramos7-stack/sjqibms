@@ -107,7 +107,7 @@ function role_capabilities(): array
         'stats.documents' => ['super_admin', 'secretary', 'official'],
         'stats.complaints' => [],   // Complaints & Blotter is hidden for now (was: super_admin, secretary)
         'stats.health_due' => ['health_worker'],   // health records are for Health Workers only
-        'stats.programs' => ['super_admin', 'treasurer', 'official'],
+        'stats.programs' => ['super_admin', 'secretary', 'treasurer', 'official'],
         'stats.announcements' => ['super_admin', 'secretary', 'official'],
         // Financial figures: Treasurer, Punong Barangay and System Administrator (read-only); includes/finance.php
         // re-checks the role in the database.
@@ -122,6 +122,8 @@ function role_capabilities(): array
         'announcements.manage' => ['super_admin', 'secretary', 'official', 'health_worker'],   // Health Workers: Health announcements only (includes/announcements.php)
         // Relief & Assistance: record, edit, mark as given and void (everyone with the menu item may view and print).
         'assistance.manage' => ['super_admin', 'secretary', 'official', 'punong_barangay'],
+        // Projects: add and edit (the Treasurer, Health Workers and residents view only).
+        'projects.manage' => ['super_admin', 'secretary', 'official'],
         // Activity history (the modules each role may see are listed in role_activity_modules()).
         'activity.view' => ['super_admin', 'secretary', 'treasurer'],
     ];

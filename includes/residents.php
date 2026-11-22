@@ -173,11 +173,9 @@ function residents_validate(array $input, ?array $existing = null): array
     }
     if ($values['civil_status'] !== '' && !array_key_exists($values['civil_status'], residents_civil_status_labels())) $errors['civil_status'] = 'Select a valid civil status.';
 
-    if ($values['contact_number'] !== '') {
-        $digits = preg_replace('/\D/', '', $values['contact_number']) ?? '';
-        if (mb_strlen($values['contact_number']) > 30 || !preg_match('/^\+?[0-9][0-9\s()\-]*$/', $values['contact_number']) || strlen($digits) < 7 || strlen($digits) > 15) {
-            $errors['contact_number'] = 'Enter a valid contact number, for example 09171234567 or +63 917 123 4567.';
-        }
+    // Mobile number: exactly 11 digits starting with 09, numbers only (the form that SMS texts use). Optional.
+    if ($values['contact_number'] !== '' && !preg_match('/^09\d{9}$/', $values['contact_number'])) {
+        $errors['contact_number'] = 'Enter an 11-digit mobile number starting with 09, numbers only (for example 09171234567).';
     }
     if ($values['address'] === '') $errors['address'] = 'Address is required.';
     elseif (mb_strlen($values['address']) > 500) $errors['address'] = 'Address must not exceed 500 characters.';
